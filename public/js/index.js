@@ -31,22 +31,31 @@ locationBtn.on('click', function () {
         return alert('Geolocation not supported by browser')
     }
 
+    locationBtn.attr('disabled', 'disabled');
+    locationBtn.text('Sending location...');
+
+
     navigator.geolocation.getCurrentPosition(function (position) {
+        locationBtn.removeAttr('disabled');
+        locationBtn.text('Send location');
         socket.emit('createLocationMessage', {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude
         });
     }, function () {
+        locationBtn.removeAttr('disabled');
+        locationBtn.text('Send location');
         return alert('Unable to fetch location')
     })
 })
 
 $('#message-form').on('submit', function (e) {
     e.preventDefault();
+    var textBox = $('[name=message]');
     socket.emit('createMessage', {
         from: 'User',
-        text: $('[name=message]').val()
+        text: textBox.val()
     }, function (data) {
-        console.log('Got it', data);
+        textBox.val('')
     })
 })
