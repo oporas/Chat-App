@@ -13,8 +13,12 @@
 
     <div class="chat__main">
         <ol id="chat" class="chat__messages"></ol>
-
+        <div id="typing" class="chat__typing" ></div>
         <div class="chat__footer">
+            <form id="name">
+                <input name="name" type="text" placeholder="Name" autofocus autocomplete="off"/>
+                <button>Update</button>
+            </form>
             <form id="message-form">
                 <input name="message" type="text" placeholder="Message" autofocus autocomplete="off"/>
                 <button>Send</button>

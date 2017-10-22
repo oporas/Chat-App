@@ -1,2 +1,2 @@
 # Node-Chat-App
-Practice repo for the-complete-nodejs-developer-course-2
+Practice repo for FRP

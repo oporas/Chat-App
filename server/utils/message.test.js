@@ -10,10 +10,10 @@ describe('generateMessage', () => {
         var message = generateMessage(from, text);
 
         expect(message.createdAt).toBeA('number');
-        expect(message).toInclude({from, text})
-    })
+        expect(message).toInclude({from, text});
+    });
 
-})
+});
 
 describe('generateLocationMessage', () => {
 
@@ -21,11 +21,11 @@ describe('generateLocationMessage', () => {
         var from = 'Joohnatan';
         var latitude = 60;
         var longitude = 25;
-        var url = `https://www.google.com/maps?q=${latitude},${longitude}`
+        var url = `https://www.google.com/maps?q=${latitude},${longitude}`;
         var message = generateLocationMessage(from, latitude, longitude);
 
         expect(message.createdAt).toBeA('number');
-        expect(message).toInclude({from, url})
-    })
+        expect(message).toInclude({from, url});
+    });
 
-})
+});

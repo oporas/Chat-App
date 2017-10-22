@@ -9,27 +9,39 @@ socket.on('disconnect', function () {
 });
 
 socket.on('newMessage', function (message) {
-    var formattedTime = moment(message.createdAt).format('h:mm a');
-    var li = $('<li></li>')
-    li.text(`${message.from}: ${formattedTime}: ${message.text}`);
-
-    $('#chat').append(li)
+    console.log('newMessage', message);
+    $('#chat').append(getMessageContent(message));
 });
 
-socket.on('newLocationMessage', function (message) {
-    var formattedTime = moment(message.createdAt).format('h:mm a');
-    var li = $('<li></li>')
-    var a = $('<a target="_black">My location</a>')
-    a.attr('href', message.url)
-    li.text(`${message.from}: ${formattedTime}: `);
-    li.append(a);
-    $('#chat').append(li)
+socket.on('users', function (users) {
+    console.log('users', users);
+    var container = $('#users');
+    container.html('');
+    users.forEach(function(user) {
+        var li = $('<li></li>');
+        li.text(`${user}`);
+        container.append(li);
+    });
 });
+
+function getMessageContent(message) {
+    var formattedTime = moment(message.createdAt).format('h:mm a');
+    var li = $('<li></li>');
+    if (message.type === 'location') {
+        var a = $('<a target="_black">My location</a>');
+        a.attr('href', message.url);
+        li.text(`${formattedTime}: ${message.from}: `);
+        li.append(a);
+    } else {
+        li.text(`${formattedTime}: ${message.from}: ${message.text}`);
+    }
+    return li;
+}
 
 var locationBtn = $('#send-location');
 locationBtn.on('click', function () {
     if (!navigator.geolocation) {
-        return alert('Geolocation not supported by browser')
+        return alert('Geolocation not supported by browser');
     }
 
     locationBtn.attr('disabled', 'disabled');
@@ -46,17 +58,26 @@ locationBtn.on('click', function () {
     }, function () {
         locationBtn.removeAttr('disabled');
         locationBtn.text('Send location');
-        return alert('Unable to fetch location')
-    })
-})
+        return alert('Unable to fetch location');
+    });
+});
+
+$('#name').on('submit', function (e) {
+    e.preventDefault();
+    var textBox = $('[name=name]');
+    socket.emit('register', {
+        name: textBox.val()
+    }, function (data) {
+        textBox.val('');
+    });
+});
 
 $('#message-form').on('submit', function (e) {
     e.preventDefault();
     var textBox = $('[name=message]');
     socket.emit('createMessage', {
-        from: 'User',
         text: textBox.val()
     }, function (data) {
-        textBox.val('')
-    })
-})
+        textBox.val('');
+    });
+});
