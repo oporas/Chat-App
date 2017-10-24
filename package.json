@@ -4,10 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server/server.js",
-    "watch": "nodemon --exec 'npm start'",
-    "test": "mocha server/**/*.test.js",
-    "test-watch": "nodemon --exec 'npm test'"
+    "start": "gulp serve"
   },
   "author": "",
   "license": "ISC",
@@ -16,12 +13,35 @@
     "express": "^4.16.2",
     "lodash": "^4.17.4",
     "moment": "^2.19.1",
-    "ramda": "^0.25.0",
-    "socket.io": "*"
+    "socket.io": "*",
+    "hbs": "latest"
   },
   "devDependencies": {
     "expect": "^1.20.2",
     "mocha": "^3.5.3",
-    "nodemon": "^1.12.1"
+    "babel-core": "latest",
+    "babel-preset-es2015": "latest",
+    "browser-sync": "^2.18.12",
+    "del": "latest",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-babel": "latest",
+    "gulp-cache": "latest",
+    "gulp-concat": "latest",
+    "gulp-cssnano": "latest",
+    "gulp-eslint": "latest",
+    "gulp-htmlmin": "latest",
+    "gulp-if": "latest",
+    "gulp-imagemin": "latest",
+    "gulp-load-plugins": "latest",
+    "gulp-newer": "latest",
+    "gulp-nodemon": "^2.2.1",
+    "gulp-sass": "latest",
+    "gulp-size": "latest",
+    "gulp-sourcemaps": "latest",
+    "gulp-strip-debug": "^1.1.0",
+    "gulp-uglify": "latest",
+    "gulp-useref": "latest",
+    "run-sequence": "latest"
   }
 }

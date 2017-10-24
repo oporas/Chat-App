@@ -1,4 +1,6 @@
-var socket = io();
+const socket = io('http://localhost:4000', {
+    path: '/socket.io'
+});
 
 socket.on('connect', function () {
     console.log('connected to server');

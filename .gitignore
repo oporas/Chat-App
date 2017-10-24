@@ -1,3 +1,8 @@
+.DS_Store
+dist/
+public/
+.tmp
+
 # Logs
 logs
 *.log

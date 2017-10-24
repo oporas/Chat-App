@@ -4,18 +4,29 @@ const http = require('http');
 const express = require('express');
 const socketIO = require('socket.io');
 const Bacon = require('baconjs').Bacon;
+const hbs = require('hbs');
 
 const {generateMessage, generateLocationMessage, generateRegisteredMessage} = require('./utils/message');
 const publicPath = path.join(__dirname, '../public');
 const port = process.env.PORT || 3000;
 var app = express();
-var server = http.createServer(app);
-var io = socketIO(server);
-
+app.set('view engine', 'hbs');
+app.set('views', path.join(__dirname, '/views'));
 app.use(express.static(publicPath));
+var server = require('http').createServer(app);  
+var io = socketIO(server);
+io.serveClient(false);
 
-server.listen(port, () => {
+app.get('/', (req, res) => {
+    res.render('index');
+});
+
+app.listen(port, () => {
     console.log(`Server is up in port ${port}`);
+});
+
+server.listen(4000, () => {
+    console.log(`Server is up in port ${4000}`);
 });
 
 var connections = Bacon.fromBinder((sink) => {
