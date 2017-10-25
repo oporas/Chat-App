@@ -13,29 +13,25 @@ var app = express();
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, '/views'));
 app.use(express.static(publicPath));
-var server = require('http').createServer(app);  
+var server = require('http').createServer(app);
 var io = socketIO(server);
-io.serveClient(false);
+// io.serveClient(false);
 
 app.get('/', (req, res) => {
     res.render('index');
 });
 
 app.listen(port, () => {
-    console.log(`Server is up in port ${port}`);
+    console.log(`App is up in port ${port}`);
 });
 
 server.listen(4000, () => {
-    console.log(`Server is up in port ${4000}`);
+    console.log(`Socket server is up in port ${4000}`);
 });
 
 var connections = Bacon.fromBinder((sink) => {
     io.on('connection', sink);
 });
-
-var getNameOrId = (socket) => {
-    return socket.name ? socket.name : socket.id;
-};
 
 var messages = connections.flatMap((socket) => {
     return Bacon.fromBinder((sink) => {
@@ -75,7 +71,6 @@ userList.onValue((users) => {
         return i.name ? i.name : 'Unnamed';
     }));
 });
-
 
 connections.onValue(function(socket) {
     socket.emit('newMessage', generateMessage('Admin', 'Welcome to the chat app'));

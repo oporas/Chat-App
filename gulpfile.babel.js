@@ -114,10 +114,6 @@ gulp.task('scripts', () =>
       // Note: Since we are not using useref in the scripts build pipeline,
       //       you need to explicitly list your scripts here in the right order
       //       to be correctly concatenated
-//      './app/scripts/pdf.js',
-//      './app/scripts/spark-md5.min.js',
-//      './app/scripts/base64binary.js"',
-//      './app/scripts/hammer.min.js',
       './app/scripts/main.js',
       // Other scripts
     ])
@@ -128,10 +124,10 @@ gulp.task('scripts', () =>
       .pipe(gulp.dest('.tmp/scripts'))
       .pipe($.concat('main.min.js'))
       .pipe($.stripDebug())
-//      .pipe($.uglify().on('error', function(err) {
-//        console.log('[Error]', err.toString());
-//        this.emit('end');
-//        }))
+    //  .pipe($.uglify().on('error', function(err) {
+    //    console.log('[Error]', err.toString());
+    //    this.emit('end');
+    //    }))
       // Output files
       .pipe($.size({title: 'scripts'}))
       .pipe($.sourcemaps.write('.'))
@@ -181,7 +177,9 @@ gulp.task('serve', ['nodemon', 'scripts', 'styles', 'images', 'copy'], () => {
     // Customize the Browsersync console logging prefix
     logPrefix: 'WSK',
     // Allow scroll syncing across breakpoints
-    scrollElementMapping: ['main', '.mdl-layout'],
+    //scrollElementMapping: ['main', '.mdl-layout'],
+    //Disable ghosting between Browsers
+    ghostMode: false,
     // Run as an https by uncommenting 'https: true'
     // Note: this uses an unsigned certificate which on first access
     //       will present a certificate warning in the browser.
@@ -200,7 +198,7 @@ gulp.task('serve', ['nodemon', 'scripts', 'styles', 'images', 'copy'], () => {
 gulp.task('nodemon', function (cb) {
   var called = false;
   return nodemon({
-    script: 'index-local.js',
+    script: 'server/server.js',
     ext: 'js html hbs',
     ignore: [
       'app/',
