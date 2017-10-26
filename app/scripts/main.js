@@ -10,6 +10,12 @@ socket.on('disconnect', function () {
     console.log('disconnect from server');
 });
 
+socket.on('setup', function (messages) {
+    console.log('setup', messages);
+    for (var message of messages) {
+        $('#chat').append(getMessageContent(message));
+    }
+});
 socket.on('newMessage', function (message) {
     console.log('newMessage', message);
     $('#chat').append(getMessageContent(message));
