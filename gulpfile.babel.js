@@ -123,7 +123,7 @@ gulp.task('scripts', () =>
       .pipe($.sourcemaps.write())
       .pipe(gulp.dest('.tmp/scripts'))
       .pipe($.concat('main.min.js'))
-      .pipe($.stripDebug())
+    //   .pipe($.stripDebug())
     //  .pipe($.uglify().on('error', function(err) {
     //    console.log('[Error]', err.toString());
     //    this.emit('end');
