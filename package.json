@@ -9,23 +9,31 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "babelify": "^8.0.0",
     "baconjs": "^0.7.95",
+    "create-react-class": "^15.6.2",
     "express": "^4.16.2",
+    "hbs": "latest",
     "lodash": "^4.17.4",
     "moment": "^2.19.1",
-    "socket.io": "*",
-    "hbs": "latest"
+    "ramda": "^0.25.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "socket.io": "*"
   },
   "devDependencies": {
-    "expect": "^1.20.2",
-    "mocha": "^3.5.3",
+    "ajv": "^5.3.0",
+    "babel-cli": "^6.26.0",
     "babel-core": "latest",
     "babel-preset-es2015": "latest",
+    "babel-preset-react": "^6.24.1",
     "browser-sync": "^2.18.12",
+    "browserify": "^14.5.0",
     "del": "latest",
+    "expect": "^1.20.2",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.1",
-    "gulp-babel": "latest",
+    "gulp-buffer": "latest",
     "gulp-cache": "latest",
     "gulp-concat": "latest",
     "gulp-cssnano": "latest",
@@ -40,8 +48,10 @@
     "gulp-size": "latest",
     "gulp-sourcemaps": "latest",
     "gulp-strip-debug": "^1.1.0",
+    "gulp-tap": "latest",
     "gulp-uglify": "latest",
     "gulp-useref": "latest",
+    "mocha": "^3.5.3",
     "run-sequence": "latest"
   }
 }

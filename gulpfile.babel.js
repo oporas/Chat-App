@@ -33,6 +33,10 @@ import browserSync from 'browser-sync';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import stripDebug from 'gulp-strip-debug';
 import nodemon from 'gulp-nodemon';
+import browserify from 'browserify';
+import babelify from 'babelify';
+import tap from 'gulp-tap';
+import buffer from 'gulp-buffer';
 // import {output as pagespeed} from 'psi';
 import pkg from './package.json';
 
@@ -115,11 +119,27 @@ gulp.task('scripts', () =>
       //       you need to explicitly list your scripts here in the right order
       //       to be correctly concatenated
       './app/scripts/main.js',
+    //   './app/scripts/**/*.jsx',
       // Other scripts
-    ])
-      .pipe($.newer('.tmp/scripts'))
-      .pipe($.sourcemaps.init())
-      .pipe($.babel())
+  ],  {read: false})
+        // .pipe($.newer('.tmp/scripts'))
+      // transform file objects using gulp-tap plugin
+    //   .pipe($.babel())
+       .pipe($.sourcemaps.init())
+       .pipe(tap(function (file) {
+
+        //  gutil.log('bundling ' + file.path);
+
+         // replace file contents with browserify's bundle stream
+         file.contents = browserify(file.path, {debug: true}).transform(babelify, {presets: ["es2015", "react"]}).bundle();
+        //  browserify -t [ babelify --presets [ react ] ] src/index.js -o build/app.js
+
+
+       }))
+
+       // transform streaming contents into buffer contents (because gulp-sourcemaps does not support streaming contents)
+       .pipe(buffer())
+
       .pipe($.sourcemaps.write())
       .pipe(gulp.dest('.tmp/scripts'))
       .pipe($.concat('main.min.js'))
@@ -132,7 +152,7 @@ gulp.task('scripts', () =>
       .pipe($.size({title: 'scripts'}))
       .pipe($.sourcemaps.write('.'))
       .pipe(gulp.dest('public/assets/scripts'))
-      .pipe(gulp.dest('.tmp/scripts'))
+    //   .pipe(gulp.dest('.tmp/scripts'))
 );
 
 // Copy static js files
@@ -191,7 +211,7 @@ gulp.task('serve', ['nodemon', 'scripts', 'styles', 'images', 'copy'], () => {
 
   gulp.watch(['app/**/*.html'], reload);
   gulp.watch(['app/styles/**/*.{scss,css}'], ['styles', reload]);
-  gulp.watch(['app/scripts/**/*.js'], ['scripts', reload]);
+  gulp.watch(['app/scripts/**/*.{js,jsx}'], ['scripts', reload]);
   gulp.watch(['app/images/**/*'], ['images', reload]);
 });
 
