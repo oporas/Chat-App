@@ -35,9 +35,11 @@ var sendMessage = $("#message").asEventStream("submit", function(event, args) {
 })
 
 sendMessage.onValue(function(message) {
-    socket.emit('createMessage', {
-        text: message
-    });
+    if (message.length > 0) {
+        socket.emit('createMessage', {
+            text: message
+        });
+    }
 })
 
 var login = $("#name").asEventStream("submit", function(event, args) {
