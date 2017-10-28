@@ -40,6 +40,9 @@ $padding: 1rem;
                 background: $primary-color;
                 padding: 1rem;
                 font-size: 1rem;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
             }
         }
 
@@ -78,7 +81,7 @@ $padding: 1rem;
             justify-content: flex-end;
 
             li {
-                padding: 0.1rem 0;
+                line-height: 1.6rem
             }
 
             a {
