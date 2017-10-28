@@ -26,9 +26,9 @@ messages.onValue(function(message) {
     $('#chat').append(getMessageContent(message));
 });
 
-var sendMessage = $("#message-form").asEventStream("submit", function(event, args) { 
+var sendMessage = $("#message").asEventStream("submit", function(event, args) {
     event.preventDefault()
-    var input = $("#message-form input");
+    var input = $("#message input");
     var message = input.val();
     input.val('');
     return message
@@ -40,7 +40,7 @@ sendMessage.onValue(function(message) {
     });
 })
 
-var login = $("#name").asEventStream("submit", function(event, args) { 
+var login = $("#name").asEventStream("submit", function(event, args) {
     event.preventDefault()
     var input = $("#name input");
     var name = input.val();
@@ -87,8 +87,8 @@ function getMessageContent(message) {
 }
 
 var locationBtn = $('#send-location');
-var sendLocationRequest = locationBtn.asEventStream("click", function(event, args) { 
-    return Bacon.fromPromise(new Promise(function(resolve, reject) {  
+var sendLocationRequest = locationBtn.asEventStream("click", function(event, args) {
+    return Bacon.fromPromise(new Promise(function(resolve, reject) {
        if (!navigator.geolocation) {
            reject('Geolocation not supported by browser');
        }
@@ -102,7 +102,7 @@ var sendLocationRequest = locationBtn.asEventStream("click", function(event, arg
 
 sendLocationRequest.onValue((location) => {
     locationBtn.attr('disabled', 'disabled');
-    locationBtn.text('Sending location...');
+    locationBtn.text('Location...');
     location.onValue((position) => {
         socket.emit('createLocationMessage', {
             latitude: position.coords.latitude,

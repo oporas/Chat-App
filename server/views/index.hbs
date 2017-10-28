@@ -3,28 +3,29 @@
 <head>
     <meta charset="utf-8">
     <link href="/assets/styles/styles.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
 <body class="chat">
 
-    <div class="chat__sidebar">
-        <h3>Amigos</h3>
-        <div id="users"></div>
-    </div>
-
-    <div class="chat__main">
-        <ol id="chat" class="chat__messages"></ol>
-        <div id="typing" class="chat__typing" ></div>
-        <div class="chat__footer">
-            <form id="name">
-                <input type="text" placeholder="Name" autofocus autocomplete="off"/>
-                <button>Update</button>
-            </form>
-            <form id="message-form">
+    <div class="main">
+        <ol id="chat" class="messages"></ol>
+        <div id="typing" class="typing" ></div>
+        <div class="inputs">
+            <form id="message">
                 <input type="text" placeholder="Message" autofocus autocomplete="off"/>
                 <button>Send</button>
             </form>
-            <button id="send-location">Send location</button>
+            <button id="send-location" class="send-location">Send location</button>
         </div>
+    </div>
+
+    <div class="sidebar">
+        <h3>Users</h3>
+        <ul id="users"></ul>
+        <form id="name">
+            <input type="text" placeholder="Name" autofocus autocomplete="off"/>
+            <button>Update</button>
+        </form>
     </div>
 
     <script src="http://localhost:4000/socket.io/socket.io.js"></script>
