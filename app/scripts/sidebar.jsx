@@ -23,7 +23,7 @@ module.exports = class Sidebar extends React.Component {
             <div className="sidebar">
                  <h3>Users</h3>
                  <ul id="users">
-                     {this.props.users.map(function(user, i){
+                     {this.props.users.map((user, i) => {
                          return <li key={i}>{user}</li>;
                      })}
                  </ul>

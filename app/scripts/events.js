@@ -1,5 +1,6 @@
 const Bacon = require('baconjs');
 
+//Event handler
 var Events = class Events {
     constructor(socket) {
         this.socket = socket;
@@ -27,28 +28,27 @@ var Events = class Events {
         this.locating = new Bacon.Bus();
         this.locationRequest = () => {
             this.locating.push(true);
-            return Bacon.fromPromise(new Promise(function(resolve, reject) {
-               if (!navigator.geolocation) {
-                   reject('Geolocation not supported by browser');
-               }
-               navigator.geolocation.getCurrentPosition(function (position) {
-                   resolve(position);
-               }, function () {
-                   reject('Unable to fetch location');
-               });
-           })).onValue((location) => {
-               this.locating.push(false);
-               socket.emit('createLocationMessage', {
-                   latitude: location.coords.latitude,
-                   longitude: location.coords.longitude
-               });
-           });
-       };
+            return Bacon.fromPromise(new Promise((resolve, reject) => {
+                if (!navigator.geolocation) {
+                    reject('Geolocation not supported by browser');
+                }
+                navigator.geolocation.getCurrentPosition((position) => {
+                    resolve(position);
+                }, () => {
+                    reject('Unable to fetch location');
+                });
+            })).onValue((location) => {
+                this.locating.push(false);
+                socket.emit('createLocationMessage', {
+                    latitude: location.coords.latitude,
+                    longitude: location.coords.longitude
+                });
+            });
+        };
 
-       //Update locating status
-       this.locatingStatus = this.locating.scan(false, function(oldStatus, status) {
-           return status;
-       });
+        //Update locating status
+        this.locatingStatus = Bacon.update(false,
+        this.locating, (oldStatus, status) => { return status; });
     }
 };
 

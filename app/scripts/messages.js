@@ -4,11 +4,13 @@ module.exports = class Messages {
     constructor(socket) {
         this.socket = socket;
         this.newMessageEvent = Bacon.fromBinder((sink) => {
-            this.socket.on('newMessage', function (message) {
+            //single new message
+            this.socket.on('newMessage', (message) => {
                 console.log('newMessage', message);
                 sink(message);
             });
-            this.socket.on('setup', function (messages) {
+            //Chat setup - list of messages
+            this.socket.on('setup', (messages) => {
                 console.log('setup', messages);
                 for (var message of messages) {
                     sink(message);
@@ -16,7 +18,8 @@ module.exports = class Messages {
             });
         });
 
-        this.all = this.newMessageEvent.scan([], function(log, message) {
+        //List of all received messages
+        this.all = this.newMessageEvent.scan([], (log, message) => {
             return log.concat(message);
         });
     }
