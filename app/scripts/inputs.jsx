@@ -31,7 +31,7 @@ module.exports = class Inputs extends React.Component {
                     <input type="text" placeholder="Message" autoFocus autoComplete="off" value={this.state.message} onChange={this.handleChange}/>
                     <button>Send</button>
                 </form>
-                <button onClick={this.handleLocation} id="send-location" className="send-location">{this.props.locating ? 'Locating...' : 'Send location'}</button>
+                <button onClick={this.handleLocation} id="send-location" className="send-location" disabled={this.props.locating}>{this.props.locating ? 'Locating...' : 'Send location'}</button>
             </div>
         );
     }
