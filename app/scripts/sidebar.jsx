@@ -7,7 +7,7 @@ module.exports = class Sidebar extends React.Component {
 
     render() {
         return (
-            <div class="sidebar">
+            <div className="sidebar">
                  <h3>Users</h3>
                  <ul id="users">
                      {this.props.users.map(function(user, i){
@@ -15,7 +15,7 @@ module.exports = class Sidebar extends React.Component {
                      })}
                  </ul>
                  <form id="name">
-                     <input type="text" placeholder="Name" autofocus autocomplete="off"/>
+                     <input type="text" placeholder="Name" autoComplete="off"/>
                      <button>Update</button>
                  </form>
              </div>

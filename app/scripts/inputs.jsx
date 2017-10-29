@@ -7,12 +7,12 @@ module.exports = class Inputs extends React.Component {
 
     render() {
         return (
-            <div class="inputs">
+            <div className="inputs">
                 <form id="message">
-                    <input type="text" placeholder="Message" autofocus autocomplete="off"/>
+                    <input type="text" placeholder="Message" autoFocus autoComplete="off"/>
                     <button>Send</button>
                 </form>
-                <button id="send-location" class="send-location">Send location</button>
+                <button id="send-location" className="send-location">Send location</button>
             </div>
         )
     }
