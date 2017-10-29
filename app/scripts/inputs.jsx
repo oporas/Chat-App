@@ -1,4 +1,4 @@
-const React    = require('react')
+const React = require('react');
 
 module.exports = class Inputs extends React.Component {
     constructor(props) {

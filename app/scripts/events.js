@@ -3,6 +3,7 @@ const Bacon = require('baconjs');
 var Events = class Events {
     constructor(socket) {
         this.socket = socket;
+        
         //Login event
         this.login = new Bacon.Bus();
         this.login.onValue((name) => {
