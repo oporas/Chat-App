@@ -10,12 +10,15 @@ $padding: 1rem;
     -webkit-appearance: none;
 }
 
-.chat {
+body {
     font-family: 'Roboto', sans-serif;
+    background: $primary-color;
+    color: $text-color;
+}
+.app {
     width: 100%;
     height: 100vh;
     display: flex;
-    color: $text-color;
 
     .sidebar {
         display: flex;
@@ -65,7 +68,7 @@ $padding: 1rem;
         }
     }
 
-    .main {
+    .chat {
         background: $primary-color;
         display: flex;
         flex: 1 0 80%;
