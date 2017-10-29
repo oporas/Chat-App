@@ -18,9 +18,9 @@ module.exports = class chatApp extends React.Component {
                     return <Message message={message} key={i} />;
                 })}
                 </ol>
-                <Inputs />
+                <Inputs events={this.props.events} />
             </div>
-            <Sidebar users={this.props.users} />
+            <Sidebar users={this.props.users} events={this.props.events} />
         </div>
     )
   }

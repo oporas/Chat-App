@@ -4,7 +4,8 @@ const React   = require('react'),
       Bacon   = require('baconjs'),
       ChatApp   = require('./chatApp.jsx'),
       Messages   = require('./messages.js'),
-      Users   = require('./users.js');
+      Users   = require('./users.js'),
+      Events   = require('./events.js');
 
 var socket = io('http://localhost:4000', {
     path: '/socket.io'
@@ -20,6 +21,7 @@ socket.on('disconnect', function () {
 
 var messages = new Messages(socket);
 var users = new Users(socket);
+var events = new Events(socket);
 
 const appState = Bacon.combineTemplate({
     messages: messages.all,
@@ -27,5 +29,5 @@ const appState = Bacon.combineTemplate({
 });
 
 appState.onValue((state) => {
-    ReactDOM.render(<ChatApp {...state} />, document.getElementById('root'));
+    ReactDOM.render(<ChatApp {...state} events={events} />, document.getElementById('root'));
 });

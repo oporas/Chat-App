@@ -7,11 +7,12 @@ module.exports = class Message extends React.Component {
     }
 
     getMessageContent(message) {
-        var formattedTime = moment(message.createdAt).format('h:mm a');
+        const formattedTime = moment(message.createdAt).format('h:mm a');
+        const className = message.from == 'System' ? 'system-message' : '';
         if (message.type === 'location') {
-            return <li>{formattedTime}: {message.from}: <a target="_black" href="{message.url}">My location</a></li>;
+            return <li className={className}>{formattedTime}: {message.from}: <a target="_black" href="{message.url}">My location</a></li>;
         }
-        return  <li>{formattedTime}: {message.from}: {message.text}</li>;
+        return  <li className={className}>{formattedTime}: {message.from}: {message.text}</li>;
     }
 
     render() {
