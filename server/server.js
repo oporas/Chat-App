@@ -68,7 +68,7 @@ userList.onValue((users) => {
 connections.onValue(function(socket) {
     socket.emit('setup', _.takeRight(log, 10));
     socket.emit('newMessage', generateMessage('Admin', 'Welcome to the chat app'));
-    socket.broadcast.emit('newMessage', generateMessage('Admin', 'New challenger appears'));
+    socket.broadcast.emit('newMessage', generateMessage('Admin', 'A challenger appears'));
     newUser.push(socket);
 });
 
