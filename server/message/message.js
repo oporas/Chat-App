@@ -10,7 +10,7 @@ var generateMessage = (from, text) => {
 var generateRegisteredMessage = (oldName, newName) => {
     return {
         type: 'text',
-        from: 'Admin',
+        from: 'System',
         text:  `${oldName} is now known as ${newName}`,
         createdAt: moment().valueOf()
     };
