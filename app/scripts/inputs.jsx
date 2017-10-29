@@ -6,6 +6,7 @@ module.exports = class Inputs extends React.Component {
         this.state = {message: ''};
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleLocation = this.handleLocation.bind(this);
     }
 
     handleChange(event) {
@@ -18,6 +19,11 @@ module.exports = class Inputs extends React.Component {
         this.setState({message: ''});
     }
 
+    handleLocation(event) {
+        event.preventDefault();
+        this.props.events.locationRequest();
+    }
+
     render() {
         return (
             <div className="inputs">
@@ -25,9 +31,9 @@ module.exports = class Inputs extends React.Component {
                     <input type="text" placeholder="Message" autoFocus autoComplete="off" value={this.state.message} onChange={this.handleChange}/>
                     <button>Send</button>
                 </form>
-                <button id="send-location" className="send-location">Send location</button>
+                <button onClick={this.handleLocation} id="send-location" className="send-location">{this.props.locating ? 'Locating...' : 'Send location'}</button>
             </div>
-        )
+        );
     }
 
-}
+};

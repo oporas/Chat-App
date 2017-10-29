@@ -1,21 +1,21 @@
 
-const React   = require('react'),
-      ReactDOM   = require('react-dom'),
-      Bacon   = require('baconjs'),
+const React     = require('react'),
+      ReactDOM  = require('react-dom'),
+      Bacon     = require('baconjs'),
       ChatApp   = require('./chatApp.jsx'),
-      Messages   = require('./messages.js'),
-      Users   = require('./users.js'),
-      Events   = require('./events.js');
+      Messages  = require('./messages.js'),
+      Users     = require('./users.js'),
+      Events    = require('./events.js');
 
 var socket = io('http://localhost:4000', {
     path: '/socket.io'
 });
 
-socket.on('connect', function () {
+socket.on('connect', () => {
     console.log('connected to server');
 });
 
-socket.on('disconnect', function () {
+socket.on('disconnect', () => {
     console.log('disconnect from server');
 });
 
@@ -26,6 +26,7 @@ var events = new Events(socket);
 const appState = Bacon.combineTemplate({
     messages: messages.all,
     users: users.userList,
+    locating: events.locatingStatus,
 });
 
 appState.onValue((state) => {

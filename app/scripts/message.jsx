@@ -1,5 +1,5 @@
 const React    = require('react'),
-      moment    = require('moment');
+      moment   = require('moment');
 
 module.exports = class Message extends React.Component {
     constructor(props) {
@@ -23,7 +23,6 @@ module.exports = class Message extends React.Component {
     render() {
         return (
             this.getMessageContent(this.props.message)
-        )
+        );
     }
-
-}
+};
