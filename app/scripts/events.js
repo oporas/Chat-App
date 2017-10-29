@@ -3,7 +3,7 @@ const Bacon = require('baconjs');
 var Events = class Events {
     constructor(socket) {
         this.socket = socket;
-        
+
         //Login event
         this.login = new Bacon.Bus();
         this.login.onValue((name) => {
@@ -24,8 +24,9 @@ var Events = class Events {
         });
 
         //Location request event
+        this.locating = new Bacon.Bus();
         this.locationRequest = () => {
-            trigger(document, 'locating', {detail: true});
+            this.locating.push(true);
             return Bacon.fromPromise(new Promise(function(resolve, reject) {
                if (!navigator.geolocation) {
                    reject('Geolocation not supported by browser');
@@ -36,7 +37,7 @@ var Events = class Events {
                    reject('Unable to fetch location');
                });
            })).onValue((location) => {
-               trigger(document, 'locating', {detail: false});
+               this.locating.push(false);
                socket.emit('createLocationMessage', {
                    latitude: location.coords.latitude,
                    longitude: location.coords.longitude
@@ -44,30 +45,11 @@ var Events = class Events {
            });
        };
 
-       //Listen to triggered locating events
-       this.locating = Bacon.fromBinder((sink) => {
-           document.addEventListener('locating', function(e) {
-               sink(e.detail);
-           });
-       });
-
        //Update locating status
        this.locatingStatus = this.locating.scan(false, function(oldStatus, status) {
            return status;
        });
     }
 };
-
-//Custom event trigger
-function trigger(el, eventName, options) {
-    var event;
-    if (window.CustomEvent) {
-        event = new CustomEvent(eventName, options);
-    } else {
-        event = document.createEvent('CustomEvent');
-        event.initCustomEvent(eventName, true, true, options);
-    }
-    el.dispatchEvent(event);
-}
 
 module.exports = Events;
