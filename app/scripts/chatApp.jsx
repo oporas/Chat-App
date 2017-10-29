@@ -20,7 +20,7 @@ module.exports = class chatApp extends React.Component {
                 </ol>
                 <Inputs />
             </div>
-            <Sidebar />
+            <Sidebar users={this.props.users} />
         </div>
     )
   }
