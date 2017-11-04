@@ -4,10 +4,6 @@ const React     = require('react'),
       Sidebar   = require('./sidebar.jsx');
 
 module.exports = class chatApp extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <div className="app">

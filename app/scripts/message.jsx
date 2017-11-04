@@ -2,10 +2,6 @@ const React    = require('react'),
       moment   = require('moment');
 
 module.exports = class Message extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     getMessageContent(message) {
         const formattedTime = moment(message.createdAt).format('h:mm a');
         const className = message.from == 'System' ? 'system-message' : '';
