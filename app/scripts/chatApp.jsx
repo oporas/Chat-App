@@ -3,20 +3,18 @@ const React     = require('react'),
       Inputs    = require('./inputs.jsx'),
       Sidebar   = require('./sidebar.jsx');
 
-module.exports = class chatApp extends React.Component {
-    render() {
-        return (
-            <div className="app">
-                <div className="chat">
-                    <ol id="chat" className="messages">
-                    {this.props.messages.map((message, i) => {
-                        return <Message message={message} key={i} />;
-                    })}
-                    </ol>
-                    <Inputs events={this.props.events} locating={this.props.locating} />
-                </div>
-                <Sidebar users={this.props.users} events={this.props.events} />
+module.exports = (props) => {
+    return (
+        <div className="app">
+            <div className="chat">
+                <ol id="chat" className="messages">
+                {props.messages.map((message, i) => {
+                    return <Message message={message} key={i} />;
+                })}
+                </ol>
+                <Inputs events={props.events} locating={props.locating} />
             </div>
-        );
-  }
+            <Sidebar users={props.users} events={props.events} />
+        </div>
+    );
 };
