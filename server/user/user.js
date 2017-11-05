@@ -1,12 +1,12 @@
 const _ = require('lodash');
 const Bacon = require('baconjs').Bacon;
 
-var newUser = new Bacon.Bus(),
+const newUser = new Bacon.Bus(),
 userLeft = new Bacon.Bus(),
 updateUser = new Bacon.Bus();
 
 //List of all users
-var userList = Bacon.update([],
+const userList = Bacon.update([],
     newUser, (users, newUser) => {
         return users.concat({id: newUser.id, name: newUser.name });
     },

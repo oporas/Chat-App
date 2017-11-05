@@ -12,9 +12,7 @@ module.exports = class Messages {
             //Chat setup - list of messages
             this.socket.on('setup', (messages) => {
                 console.log('setup', messages);
-                for (var message of messages) {
-                    sink(message);
-                }
+                messages.map(sink);
             });
         });
 

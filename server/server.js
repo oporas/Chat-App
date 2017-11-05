@@ -9,12 +9,12 @@ const publicPath = path.join(__dirname, '../public');
 const port = process.env.PORT || 3000;
 
 //Setup server
-var app = express();
+const app = express();
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, '/views'));
 app.use(express.static(publicPath));
-var server = require('http').createServer(app);
-var io = socketIO(server);
+const server = require('http').createServer(app);
+const io = socketIO(server);
 
 app.get('/', (req, res) => {
     res.render('index');
@@ -33,16 +33,16 @@ const {userList, newUser, userLeft, updateUser} = require('./user/user');
 
 var log = [];
 
-var connections = Bacon.fromBinder((sink) => {
+const connections = Bacon.fromBinder((sink) => {
     io.on('connection', sink);
 });
 
 //Shows users as 'Unnamed' if name not given
-var getName = (socket) => {
+const getName = (socket) => {
     return socket.name ? socket.name : 'Unnamed';
 };
 
-var messages = connections.flatMap((socket) => {
+const messages = connections.flatMap((socket) => {
     return Bacon.fromBinder((sink) => {
         //Default message
         socket.on('createMessage', (message) => {

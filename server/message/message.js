@@ -1,5 +1,5 @@
 const moment = require('moment');
-var generateMessage = (from, text) => {
+const generateMessage = (from, text) => {
     return {
         type: 'text',
         from,
@@ -7,7 +7,7 @@ var generateMessage = (from, text) => {
         createdAt: moment().valueOf()
     };
 };
-var generateRegisteredMessage = (oldName, newName) => {
+const generateRegisteredMessage = (oldName, newName) => {
     return {
         type: 'text',
         from: 'System',
@@ -15,7 +15,7 @@ var generateRegisteredMessage = (oldName, newName) => {
         createdAt: moment().valueOf()
     };
 };
-var generateLocationMessage = (from, latitutude, longitude) => {
+const generateLocationMessage = (from, latitutude, longitude) => {
     return {
         type: 'location',
         from,

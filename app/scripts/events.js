@@ -1,7 +1,7 @@
 const Bacon = require('baconjs');
 
 //Event handler
-var Events = class Events {
+module.exports = class Events {
     constructor(socket) {
         this.socket = socket;
 
@@ -51,5 +51,3 @@ var Events = class Events {
         this.locating, (oldStatus, status) => { return status; });
     }
 };
-
-module.exports = Events;

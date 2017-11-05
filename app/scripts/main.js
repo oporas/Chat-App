@@ -1,4 +1,3 @@
-
 const React     = require('react'),
       ReactDOM  = require('react-dom'),
       Bacon     = require('baconjs'),
@@ -7,7 +6,7 @@ const React     = require('react'),
       Users     = require('./users.js'),
       Events    = require('./events.js');
 
-var socket = io('http://localhost:4000', {
+const socket = io('http://localhost:4000', {
     path: '/socket.io'
 });
 
@@ -19,9 +18,9 @@ socket.on('disconnect', () => {
     console.log('disconnect from server');
 });
 
-var messages = new Messages(socket);
-var users = new Users(socket);
-var events = new Events(socket);
+const messages = new Messages(socket);
+const users = new Users(socket);
+const events = new Events(socket);
 
 const appState = Bacon.combineTemplate({
     messages: messages.all,
